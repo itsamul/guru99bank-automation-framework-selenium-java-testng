@@ -18,41 +18,32 @@ public class AddCustomerTest extends Base {
 	@Test(priority = 1, description = "Verify after clicking on New Customer, page redirects to Add New Customer page.")
 	public void verifyAddNewCustomerPage() {
 		loginPage = new LoginPage(driver);
-		loginPage.loginToAppWithCredentials(dataProperties.getProperty("validUserId"),
-				dataProperties.getProperty("validPassword"));
+		loginPage.loginToAppWithCredentials(dataProperties.getProperty("validUserId"), dataProperties.getProperty("validPassword"));
 		managerHomePage = new ManagerHomePage(driver);
 		addCustomerPage = managerHomePage.navigateToAddCustomerPage();
-		Assert.assertTrue(addCustomerPage.isAddCustomerPageDisplayed(),
-				addCustomerPage.getAddCustomerText() + " text not displayed.");
+		Assert.assertTrue(addCustomerPage.isAddCustomerPageDisplayed(), addCustomerPage.getAddCustomerText() + " text not displayed.");
 	}
 
 	@Test(priority = 2, dataProvider = "AddNewCustomer", dataProviderClass = DataProviders.class, description = "Verify after creating new Customer, page redirects to details of added customer")
 	public void verifyCustomerDetailsPage(String name, String gender, String dob, String Address, String City,
 			String State, String pincode, String Mobile, String email, String password) {
 		loginPage = new LoginPage(driver);
-		loginPage.loginToAppWithCredentials(dataProperties.getProperty("validUserId"),
-				dataProperties.getProperty("validPassword"));
+		loginPage.loginToAppWithCredentials(dataProperties.getProperty("validUserId"), dataProperties.getProperty("validPassword"));
 		managerHomePage = new ManagerHomePage(driver);
 		addCustomerPage = managerHomePage.navigateToAddCustomerPage();
-		customerRegisteredPage = addCustomerPage.createNewCustomer(name, gender, dob, Address, City, State, pincode,
-				Mobile, email, password);
-		Assert.assertTrue(customerRegisteredPage.isCustomerRegisteredPageDisplayed(),
-				customerRegisteredPage.getCustomerRegisteredText() + " text not displayed.");
+		customerRegisteredPage = addCustomerPage.createNewCustomer(name, gender, dob, Address, City, State, pincode, Mobile, email, password);
+		Assert.assertTrue(customerRegisteredPage.isCustomerRegisteredPageDisplayed(), customerRegisteredPage.getCustomerRegisteredText() + " text not displayed.");
 		capturePageScreenshot();
 	}
 
-	@Test(priority = 1, dataProvider = "AddNewCustomer2", dataProviderClass = DataProviders.class, description = "Verify after creating new Customer, page redirects to details of added customer")
-	public void verifyNewlyCreatedCustomerDetails(String name, String gender, String dob, String Address, String City,
-			String State, String pincode, String Mobile, String email, String password) {
+	@Test(priority = 3, dataProvider = "AddNewCustomer2", dataProviderClass = DataProviders.class, description = "Verify after creating new Customer, page redirects to details of added customer")
+	public void verifyNewlyCreatedCustomerDetails(String name, String gender, String dob, String Address, String City, String State, String pincode, String Mobile, String email, String password) {
 		loginPage = new LoginPage(driver);
-		loginPage.loginToAppWithCredentials(dataProperties.getProperty("validUserId"),
-				dataProperties.getProperty("validPassword"));
+		loginPage.loginToAppWithCredentials(dataProperties.getProperty("validUserId"), dataProperties.getProperty("validPassword"));
 		managerHomePage = new ManagerHomePage(driver);
 		addCustomerPage = managerHomePage.navigateToAddCustomerPage();
-		customerRegisteredPage = addCustomerPage.createNewCustomer(name, gender, dob, Address, City, State, pincode,
-				Mobile, email, password);
-		Assert.assertTrue(customerRegisteredPage.isCustomerRegisteredPageDisplayed(),
-				customerRegisteredPage.getCustomerRegisteredText() + " text not displayed.");
+		customerRegisteredPage = addCustomerPage.createNewCustomer(name, gender, dob, Address, City, State, pincode, Mobile, email, password);
+		Assert.assertTrue(customerRegisteredPage.isCustomerRegisteredPageDisplayed(), customerRegisteredPage.getCustomerRegisteredText() + " text not displayed.");
 		Assert.assertTrue(name.equalsIgnoreCase(customerRegisteredPage.getCustomerName()));
 		Assert.assertTrue(gender.equalsIgnoreCase(customerRegisteredPage.getCustomerGender()));
         Assert.assertTrue(dob.equalsIgnoreCase(customerRegisteredPage.getCustomerDob()));
